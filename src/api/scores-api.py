@@ -1,0 +1,2 @@
+class ScoresApi:
+    pass
