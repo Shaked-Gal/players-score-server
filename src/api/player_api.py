@@ -1,8 +1,6 @@
-from fastapi import FastAPI
+from main import app
 
 from src.controllers.controllers import Controllers
-
-app = FastAPI()
 
 controller = Controllers()
 

@@ -1,8 +1,10 @@
 import uvicorn
+from fastapi import FastAPI
 from pymongo import MongoClient
 
-from src.api.player_api import app
 from src.dal.mongo_db import MongoDB
+
+app = FastAPI()
 
 # initialize mongo db
 db_name = "myDB"
