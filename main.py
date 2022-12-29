@@ -1,16 +1,27 @@
 import uvicorn
-from fastapi import FastAPI
-from pymongo import MongoClient
+from fastapi import FastAPI, APIRouter
 
-from src.dal.mongo_db import MongoDB
+from config.config import DB_NAME, COLLECTION_NAME
+from src.db.mongo_db import MongoDBManager
+
+
+def get_mongo_db_manager():
+    return mongoDBManager
+
+
+#  todo : needs to happen only once
+mongoDBManager = MongoDBManager(DB_NAME, COLLECTION_NAME)
+print("---initialized mongo db---")
 
 app = FastAPI()
+user_router = APIRouter(tags=["user"])
 
-# initialize mongo db
-db_name = "myDB"
-collection_name = "users"
-client = MongoClient('localhost', 27017)
-db = MongoDB(client, db_name)
+app.include_router(user_router)
 
 if __name__ == '__main__':
-    uvicorn.run(app)
+    uvicorn.run(
+        app,
+        host='127.0.0.1',
+        port=3000,
+        reload=False,
+    )

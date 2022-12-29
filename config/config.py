@@ -1,0 +1,2 @@
+DB_NAME = "myDB"
+COLLECTION_NAME = "users"
