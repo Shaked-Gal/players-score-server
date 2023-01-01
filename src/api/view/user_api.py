@@ -1,12 +1,14 @@
 from fastapi import APIRouter
 
-from src.api.controllers.user_controller import UserController
+from src.api.controllers.user_controllers import UserController
 from src.api.models.user_models import UserRequest
 from src.db.models.user import User
+from fastapi_utils.cbv import cbv
 
 router = APIRouter(tags=["user"])
 
 
+@cbv(router)
 class UserApi:
     @router.get("/user/{_id}")
     def get_user(self, _id: str) -> User:
@@ -31,7 +33,7 @@ class UserApi:
     #     return Controllers.get_all_scores_sorted_by_id()
     #
     # @app.get("/users/{user}?top=3")
-    # def get_top3_names_start_with_specific_letter(self, user):
+    # def get_top_three_names_start_with_specific_letter(self, user):
     #     return Controllers.get_top3_names_specific(user)
     #
 

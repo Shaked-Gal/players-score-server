@@ -39,7 +39,7 @@ class ScoreControllers:
     #     return cls.mongo_db_manager.find_all_scores_sorted_by_id()
     #
     # @classmethod
-    # def get_top3_names_specific(cls, user):
+    # def get_top_three_names_specific(cls, user):
     #     return cls.mongo_db_manager.find_top_three_names_specific(user)
     #
 

@@ -4,5 +4,5 @@ from pydantic import BaseModel
 
 class User(BaseModel):
     _id: ObjectId
-    name: str
+    user: str
     score: int
