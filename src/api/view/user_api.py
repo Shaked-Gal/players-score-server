@@ -1,21 +1,23 @@
-from fastapi_utils.cbv import cbv
+from fastapi import APIRouter
 
-from main import user_router
 from src.api.controllers.user_controller import UserController
 from src.api.models.user_models import UserRequest
 from src.db.models.user import User
 
+router = APIRouter(tags=["user"])
 
-@cbv(user_router)
-class UserApi:
 
-    @user_router.get("/user/{_id}")
-    def get_user(self, _id: str) -> User:
-        return UserController.get_user(_id)
+#  todo: add correct router logic
 
-    @user_router.post("/user/")
-    def create_user(self, user_request: UserRequest) -> User:
-        return UserController.create_user(user_request)
+
+@router.get("/user/{_id}")
+def get_user(self, _id: str) -> User:
+    return UserController.get_user(_id)
+
+
+@router.post("/user/")
+def create_user(self, user_request: UserRequest) -> User:
+    return UserController.create_user(user_request)
 
     # @app.get("/users")
     # def get_all_users(self):
