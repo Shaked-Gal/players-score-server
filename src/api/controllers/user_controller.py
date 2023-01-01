@@ -1,5 +1,5 @@
-from main import get_mongo_db_manager
 from src.api.models.user_models import UserRequest
+from src.db.init_db import get_mongo_db_manager
 
 
 class UserController:
