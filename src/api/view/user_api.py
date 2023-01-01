@@ -7,17 +7,14 @@ from src.db.models.user import User
 router = APIRouter(tags=["user"])
 
 
-#  todo: add correct router logic
+class UserApi:
+    @router.get("/user/{_id}")
+    def get_user(self, _id: str) -> User:
+        return UserController.get_user(_id)
 
-
-@router.get("/user/{_id}")
-def get_user(self, _id: str) -> User:
-    return UserController.get_user(_id)
-
-
-@router.post("/user/")
-def create_user(self, user_request: UserRequest) -> User:
-    return UserController.create_user(user_request)
+    @router.post("/user/")
+    def create_user(self, user_request: UserRequest) -> User:
+        return UserController.create_user(user_request)
 
     # @app.get("/users")
     # def get_all_users(self):
