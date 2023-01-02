@@ -2,9 +2,11 @@ import uvicorn
 from fastapi import FastAPI
 
 import src.api.view.user_api as user_api
+import src.api.view.score_api as score_api
 
 app = FastAPI()
-app.include_router(user_api.router)
+app.include_router(user_api.user_router)
+app.include_router(score_api.score_router)
 
 
 @app.get('/')

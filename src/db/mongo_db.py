@@ -9,11 +9,11 @@ class MongoDBManager(DatabaseManager):
         self.db = self.client[db_name]
         self.collection = self.db[collection_name]
 
-    def insert_one(self, data):
-        return self.collection.insert_one(data)
+    def insert_one(self, query):
+        return self.collection.insert_one(query)
 
-    def insert_many(self, data_list):
-        return self.collection.insert_many(data_list)
+    def insert_many(self, query):
+        return self.collection.insert_many(query)
 
     def find_one(self, query):
         return self.collection.find_one(query)
