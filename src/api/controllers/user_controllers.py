@@ -8,6 +8,8 @@ class UserControllers:
 
     @classmethod
     def get_user(cls, user_id):
+        if not ObjectId.is_valid(user_id):
+            return {"error": "Id is not ObjectId"}
         user = cls.mongo_db_manager.find_one({"_id": ObjectId(user_id)})
         if user is None:
             return {"error": "User not found"}
@@ -29,6 +31,8 @@ class UserControllers:
 
     @classmethod
     def update_user(cls, _id, user_request: UserRequest):
+        if not ObjectId.is_valid(_id):
+            return {"error": "Id is not ObjectId"}
         user = cls.mongo_db_manager.find_one({"_id": ObjectId(_id)})
         if user is None:
             return {"error": "User not found"}
@@ -39,6 +43,8 @@ class UserControllers:
 
     @classmethod
     def delete_user(cls, _id):
+        if not ObjectId.is_valid(_id):
+            return {"error": "Id is not ObjectId"}
         user = cls.mongo_db_manager.find_one({"_id": ObjectId(_id)})
         if user is None:
             return {"error": "User not found"}
