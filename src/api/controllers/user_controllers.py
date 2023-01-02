@@ -29,6 +29,9 @@ class UserControllers:
 
     @classmethod
     def update_user(cls, _id, user_request: UserRequest):
+        user = cls.mongo_db_manager.find_one({"_id": ObjectId(_id)})
+        if user is None:
+            return {"error": "User not found"}
         my_filter = {"_id": ObjectId(_id)}
         my_new_values = {"$set": {"user": user_request.user, "score": user_request.score}}
         cls.mongo_db_manager.update_one(my_filter, my_new_values)
@@ -36,5 +39,8 @@ class UserControllers:
 
     @classmethod
     def delete_user(cls, _id):
+        user = cls.mongo_db_manager.find_one({"_id": ObjectId(_id)})
+        if user is None:
+            return {"error": "User not found"}
         cls.mongo_db_manager.delete_one({"_id": ObjectId(_id)})
         return "User deleted"
