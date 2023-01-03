@@ -5,25 +5,6 @@ from random import randint
 class ScoreControllers:
     mongo_db_manager = get_mongo_db_manager()
 
-    # @classmethod
-    # def guess_random(cls, name, number):
-    #     # Guess:
-    #     random_number = randint(1, 9)
-    #     my_score = 0
-    #     user_score = 0
-    #     while my_score != random_number:
-    #         my_score = int(input(f"Guess my secret number from 1 to 9:"))
-    #     if my_score < random_number:
-    #         print("Incorrect, too low")
-    #     elif my_score > random_number:
-    #         print("Incorrect, too high")
-    #     user_score += 1
-    #     print(f" Correct! Good job {user_name}, my secret number is indeed {random_number}\n "
-    #           f"You have guessed it in {user_score} guesses.")
-
-    # cls.create_user(cls, user_name, user_score)
-    # Function not done
-
     @classmethod
     def best_score(cls):
         # Best score is the lowest number (the least guesses)

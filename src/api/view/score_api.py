@@ -7,9 +7,6 @@ score_router = APIRouter(tags=["score"])
 
 @cbv(score_router)
 class UserApi:
-    @score_router.get("/score/guess/{name}{number}")
-    def guess(self, name, number):
-        return ScoreControllers.guess_random(name, number)
 
     @score_router.get("/score/best")
     def best_score(self):
