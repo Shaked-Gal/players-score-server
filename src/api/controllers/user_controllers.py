@@ -1,3 +1,4 @@
+from bson.errors import InvalidId
 from src.api.models.user_models import UserRequest
 from src.db.init_db import get_mongo_db_manager
 from bson import ObjectId
@@ -8,11 +9,13 @@ class UserControllers:
 
     @classmethod
     def get_user(cls, user_id):
-        if not ObjectId.is_valid(user_id):
-            return {"error": "Id is not ObjectId"}
+        try:
+            ObjectId(user_id)
+        except InvalidId:
+            return {"InvalidId": "Id is not ObjectId"}
         user = cls.mongo_db_manager.find_one({"_id": ObjectId(user_id)})
         if user is None:
-            return {"error": "User not found"}
+            return {"Error": "User not found"}
         return str(user)
 
     @classmethod
@@ -24,15 +27,17 @@ class UserControllers:
     def get_all_users(cls):
         users = cls.mongo_db_manager.find_many({})
         if users is None:
-            return {"error": "Users not found"}
+            return {"Error": "Users not found"}
         length = cls.mongo_db_manager.collection.count_documents({})
         users_list = [next(users) for _ in range(length)]
         return str(users_list)
 
     @classmethod
     def update_user(cls, _id, user_request: UserRequest):
-        if not ObjectId.is_valid(_id):
-            return {"error": "Id is not ObjectId"}
+        try:
+            ObjectId(_id)
+        except InvalidId:
+            return {"InvalidId": "Id is not ObjectId"}
         user = cls.mongo_db_manager.find_one({"_id": ObjectId(_id)})
         if user is None:
             return {"error": "User not found"}
@@ -43,8 +48,10 @@ class UserControllers:
 
     @classmethod
     def delete_user(cls, _id):
-        if not ObjectId.is_valid(_id):
-            return {"error": "Id is not ObjectId"}
+        try:
+            ObjectId(_id)
+        except InvalidId:
+            return {"InvalidId": "Id is not ObjectId"}
         user = cls.mongo_db_manager.find_one({"_id": ObjectId(_id)})
         if user is None:
             return {"error": "User not found"}
