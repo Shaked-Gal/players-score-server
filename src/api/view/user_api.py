@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Body
 
 from src.api.controllers.user_controllers import UserControllers
-from src.api.models.user_models import UserRequest
+from src.api.models.models import UserRequest
 from src.db.models.user import User
 from fastapi_utils.cbv import cbv
 
